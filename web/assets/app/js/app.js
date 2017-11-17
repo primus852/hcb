@@ -190,6 +190,12 @@ function loadDetails(trigger, id) {
         initModal();
         initTooltips('.tt');
         initPerfectScrollbar('.subScroll');
+
+        /* If it is a menu Link, init active menu bar */
+        if(trigger.hasClass('mLink')){
+            initMenu(trigger.parent());
+        }
+
     });
 }
 

@@ -35,7 +35,7 @@
             <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
                 <input type="hidden" name="_target_path" value="{{ lastRoute }}"/>
-                <h4 class="section-heading"><span>MITSWiki</span></h4>
+                <h4 class="section-heading"><span>Hotel Control Board</span></h4>
                 {% for flash_message in app.session.flashbag.get('success') %}
                     <div class="row">
                         <div class="column">

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>PrimuS::Template</title>
+    <title>HCB::{{ hotel_name }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -30,7 +30,7 @@
 
 <aside id="sidebar" class="nano">
     <div class="nano-content" id="pScrollerMenu">
-        <div class="logo-container"><span class="logo fa fa-envelope"></span>PrimuS852</div>
+        <div class="logo-container"><span class="logo fa fa-building"></span>HCB</div>
         <div class="menu-segment text-center">
             <div class="row">
                 <div class="col-12">
@@ -56,7 +56,7 @@
             <ul>
                 <li id="contentMenu1">
                     <a href="#" class="mLink clickable"
-                       data-url=""
+                       data-url="{{ path('renderOverview') }}"
                        data-hash="menu-1"
                        data-trigger="1"
                     >

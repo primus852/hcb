@@ -37,6 +37,8 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+      hotel_name: '%hotel_name%'
 
 # Doctrine Configuration
 doctrine:

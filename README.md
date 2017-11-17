@@ -1,13 +1,16 @@
-Symfony3 Admin Template
+HCB - Hotel Control Board
 =======
 
+Small project to manage daily hotel duties.
+
 ## Quick Install ##
-- `git clone https://github.com/primus852/symfony3-admin`
-- `cd symfony3-admin`
+- `git clone https://github.com/primus852/hcb`
+- `cd hcb`
 - `npm install --prefix=web/assets`
 - `composer update`
 
 ## Additional ##
+- Create user table: `php bin/console doctrine:generate:entities AppBundle && php bin/console doctrine:schema:update --force --complete --dump-sql && php bin/console doctrine:schema:validate`
 - Create a user: `php bin/console fos:user:create myusername --super-admin`
 
 ## License ##
