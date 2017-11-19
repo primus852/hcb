@@ -22,3 +22,7 @@ label {
     font-weight: 300;
     font-size: 0.85rem;
 }
+
+.margin-15{
+    margin-top: -15px;
+}

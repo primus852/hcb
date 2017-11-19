@@ -1,0 +1,175 @@
+<div class="header">
+    <div class="row">
+        <div class="col-10">
+            <h1 class="page-title"><a class="icon circle-icon fa fa-remove trigger-message-close"></a>
+                BAR-Setup
+            </h1>
+        </div>
+        <div class="col-2 text-right">
+            &nbsp;
+        </div>
+    </div>
+</div>
+<div class="messageFly-nano-wrapper nano">
+    <div class="nano-content">
+        <div class="message-container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="message-box">
+                        <div class="row">
+                            <div class="col-1">
+                                <select id="modSingle" class="changeModifier">
+                                    <option value="add"{% if base.modSingle == 'add' %} selected="selected"{% endif %}>
+                                        +
+                                    </option>
+                                    <option value="subtract"{% if base.modSingle == 'subtract' %} selected="selected"{% endif %}>
+                                        -
+                                    </option>
+                                    <option value="times"{% if base.modSingle == 'times' %} selected="selected"{% endif %}>
+                                        x
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-8 nice-font margin-15">
+                                <a href="#" class="editable"
+                                   data-name="valSingle"
+                                   data-type="text" data-pk="1"
+                                   data-url="{{ path('ajaxEditField', {'table':'SetupBar'|encrypt}) }}"
+                                   data-title="Single Modifier"
+                                >
+                                    {{ base.valSingle }}
+                                </a>&euro;
+                            </div>
+                            <div class="col-3 text-right">
+                                <h3 class="nice-font">Single</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="message-box">
+                        <div class="row">
+                            <div class="col-1">
+                                <select id="modDouble" class="changeModifier">
+                                    <option value="add"{% if base.modDouble == 'add' %} selected="selected"{% endif %}>+
+                                    </option>
+                                    <option value="subtract"{% if base.modDouble == 'subtract' %} selected="selected"{% endif %}>
+                                        -
+                                    </option>
+                                    <option value="times"{% if base.modDouble == 'times' %} selected="selected"{% endif %}>
+                                        x
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-8 nice-font margin-15">
+                                <a href="#" class="editable"
+                                   data-name="valDouble"
+                                   data-type="text" data-pk="1"
+                                   data-url="{{ path('ajaxEditField', {'table':'SetupBar'|encrypt}) }}"
+                                   data-title="Double Modifier"
+                                >
+                                    {{ base.valDouble }}
+                                </a>&euro;
+                            </div>
+                            <div class="col-3 text-right">
+                                <h3 class="nice-font">Double</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="message-box">
+                        <div class="row">
+                            <div class="col-1">
+                                <select id="modTriple" class="changeModifier">
+                                    <option value="add"{% if base.modTriple == 'add' %} selected="selected"{% endif %}>+
+                                    </option>
+                                    <option value="subtract"{% if base.modTriple == 'subtract' %} selected="selected"{% endif %}>
+                                        -
+                                    </option>
+                                    <option value="times"{% if base.modTriple == 'times' %} selected="selected"{% endif %}>
+                                        x
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-8 nice-font margin-15">
+                                <a href="#" class="editable"
+                                   data-name="valTriple"
+                                   data-type="text" data-pk="1"
+                                   data-url="{{ path('ajaxEditField', {'table':'SetupBar'|encrypt}) }}"
+                                   data-title="Triple Modifier"
+                                >
+                                    {{ base.valTriple }}
+                                </a>&euro;
+                            </div>
+                            <div class="col-3 text-right">
+                                <h3 class="nice-font">Triple</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="message-box">
+                        <div class="row">
+                            <div class="col-1">
+                                <select id="modQuadruple" class="changeModifier">
+                                    <option value="add"{% if base.modQuadruple == 'add' %} selected="selected"{% endif %}>+
+                                    </option>
+                                    <option value="subtract"{% if base.modQuadruple == 'subtract' %} selected="selected"{% endif %}>
+                                        -
+                                    </option>
+                                    <option value="times"{% if base.modQuadruple == 'times' %} selected="selected"{% endif %}>
+                                        x
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-8 nice-font margin-15">
+                                <a href="#" class="editable"
+                                   data-name="valQuadruple"
+                                   data-type="text" data-pk="1"
+                                   data-url="{{ path('ajaxEditField', {'table':'SetupBar'|encrypt}) }}"
+                                   data-title="Quadruple Modifier"
+                                >
+                                    {{ base.valQuadruple }}
+                                </a>&euro;
+                            </div>
+                            <div class="col-3 text-right">
+                                <h3 class="nice-font">Quadruple</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="message-box">
+                        <div class="row">
+                            <div class="col-1 margin-15">
+                                <h3 class="nice-font">+</h3>
+                            </div>
+                            <div class="col-8 nice-font margin-15">
+                                <a href="#" class="editable"
+                                   data-name="valExtra"
+                                   data-type="text" data-pk="1"
+                                   data-url="{{ path('ajaxEditField', {'table':'SetupBar'|encrypt}) }}"
+                                   data-title="Extrabed"
+                                >
+                                    {{ base.valExtra }}
+                                </a>&euro;
+                            </div>
+                            <div class="col-3 text-right">
+                                <h3 class="nice-font">Extrabed</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

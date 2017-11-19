@@ -22,4 +22,5 @@ services:
     arguments:
       - "@security.authorization_checker"
       - "@router"
+      - "@doctrine.orm.entity_manager"
 

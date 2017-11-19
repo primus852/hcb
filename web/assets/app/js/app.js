@@ -26,7 +26,7 @@ $(function () {
     $(window).hashchange();
 
     /* ------- Add active menu ------- */
-    initMenu('#'+GetNav);
+    initMenu('#' + GetNav);
 
     /* ------- Add slider overlays ------- */
     initOverlays();
@@ -37,7 +37,9 @@ $(function () {
 
 });
 
-function initMenu(selector){
+function initMenu(selector) {
+
+    $('.mLink').removeClass('active');
     var $curMenu = $(selector);
     if (!$curMenu.is(':visible')) {
         $curMenu.parent().prev('a').trigger('click');
@@ -46,6 +48,7 @@ function initMenu(selector){
 }
 
 function initOverlays() {
+
     cols.showOverlay = function () {
         $('body').addClass('show-main-overlay');
     };
@@ -53,16 +56,14 @@ function initOverlays() {
         $('body').removeClass('show-main-overlay');
     };
 
-
     cols.showMessage = function () {
         $('body').addClass('show-message');
         messageIsOpen = true;
     };
     cols.hideMessage = function () {
-        $('body').removeClass('show-message');
+        $('body').removeClass('show-message').removeClass('show-main-overlay');
         messageIsOpen = false;
     };
-
 
     cols.showSidebar = function () {
         $('body').addClass('show-sidebar');
@@ -71,29 +72,9 @@ function initOverlays() {
         $('body').removeClass('show-sidebar');
     };
 
-
-    // Show sidebar when trigger is clicked
-
     $('.trigger-toggle-sidebar').on('click', function () {
         cols.showSidebar();
         cols.showOverlay();
-    });
-
-
-    $('.trigger-message-close').on('click', function () {
-
-        var $mb = $(this).closest('.messageFly');
-
-        if ($('.messageFly').length <= 1) {
-            cols.hideMessage();
-            $mb.remove();
-            history.pushState("", document.title, window.location.pathname);
-        } else {
-            $mb.animate({left: '9999px'}, function () {
-                $mb.remove();
-            });
-        }
-
     });
 
     // When you click the overlay, close everything
@@ -102,6 +83,177 @@ function initOverlays() {
         cols.hideMessage();
         cols.hideSidebar();
     });
+}
+
+$(document).on('click', '.editable', function (e) {
+    e.preventDefault();
+    return false;
+});
+
+$(document).on('change', '.changeModifier', function () {
+
+    var $url = $('#ajax-route-edit-mod').val();
+    var $val = $(this).val();
+    var $field = $(this).attr('id');
+
+    /* Ajax Call */
+    $.get($url, {
+        field: $field,
+        val: $val
+    }).done(function (data) {
+        openNoty(data.result, data.message);
+    });
+
+
+});
+
+$(document).on('click', '.trigger-message-close', function () {
+
+    var $mb = $(this).closest('.messageFly');
+    $('.mLink').parent().removeClass('active');
+
+    if ($('.messageFly').length <= 1) {
+        cols.hideMessage();
+        $mb.remove();
+        history.pushState("", document.title, window.location.pathname);
+    } else {
+        $mb.animate({left: '9999px'}, function () {
+            $mb.remove();
+        });
+    }
+
+});
+
+$(document).on('click', '.addEntry', function (e) {
+
+    e.preventDefault();
+    openNotyAdd($(this));
+
+});
+
+function openNotyAdd(btn) {
+
+    var text = '' +
+        '<div class="row">\n    ' +
+        '   <div class="col-12">\n        ' +
+        '       <div class="card cardTransparent">\n            ' +
+        '           <div class="card-body">\n                ' +
+        '               <div class="row">\n                    ' +
+        '                   <div class="col-12">\n                        ' +
+        '                       <h4 class="card-title">' + btn.attr('data-add-heading') + '</h4>\n                        ' +
+        '                       <h6 class="card-subtitle mb-2 text-muted">&nbsp;</h6>\n                    ' +
+        '                   </div>\n                ' +
+        '               </div>\n                ' +
+        '               <div class="row">\n                    ' +
+        '                   <div class="col-12" id="loadForm">\n                        ' +
+        '                       <i class="fa fa-spin fa-spinner"></i>\n                    ' +
+        '                   </div>\n                ' +
+        '               </div>\n            ' +
+        '           </div>\n        ' +
+        '       </div>\n    ' +
+        '   </div>\n' +
+        '</div>\n';
+
+    var n = new Noty({
+        layout: 'center',
+        text: text,
+        type: 'alert',
+        timeout: false,
+        theme: 'mint',
+        modal: true,
+        closeWith: ['button'],
+        buttons: [
+            Noty.button('Save', 'btn btn-success btn-sm rounded-0 btn-block pointer saveModal', function () {
+
+                var $btnId = $(this)[0]['id'];
+                var $btn = $('#' + $btnId);
+                var $html = $btn.html();
+                if ($btn.hasClass('disabled')) {
+                    return false;
+                }
+
+                $btn.addClass('disabled').html('<i class="fa fa-spin fa-spinner"></i>');
+
+                var sendData = [];
+                $('.sendValue').each(function (i, v) {
+                    var dataName = $(v).attr('data-name');
+                    var dataVal = $(v).val();
+                    var dataIndex = $(v).attr('data-table-index');
+                    var dataType = $(v).attr('type');
+                    var dataExtra = $(v).attr('data-extra');
+                    if (dataType === 'checkbox') {
+                        dataVal = $(v).is(':checked');
+                    }
+                    var elem = {
+                        name: dataName,
+                        val: dataVal,
+                        type: dataType,
+                        extra: dataExtra,
+                        index: dataIndex
+                    };
+                    sendData.push(elem);
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: btn.attr('data-url-save'),
+                    data: {
+                        data: sendData,
+                        parent: btn.attr('data-parent-entity')
+                    },
+                    success: function (data) {
+                        openNoty(data.result, data.message);
+                        if (data.result === 'success') {
+                            var $tbl = $('#' + btn.attr('data-tbody-id'));
+                            var $tblRow = $('<tr id="row_' + data.extra.span + '_' + data.extra.id + '">');
+                            $.each(data.extra.fields, function (i, v) {
+                                $tblRow.append('' +
+                                    '<td class="' + v.cellClass + '">' +
+                                    '   <span class="' + data.extra.span + '_' + v.name + '_' + data.extra.id + '">' + v.value + '</span>' +
+                                    '</td>'
+                                )
+                            });
+
+                            $tblRow.append('' +
+                                '<td class="text-center">' +
+                                '   <a href="#" class="btn btn-danger tt" title="Remove Rate"><i class="fa fa-remove"></i></a>' +
+                                '   <a href="#" class="btn btn-warning tt" title="Edit Rate"><i class="fa fa-edit"></i></a>' +
+                                '</td>'
+                            );
+
+                            $tbl.append($tblRow);
+                            n.close();
+
+                        }
+                    },
+                    fail: function (err) {
+                        openNoty('error', 'Error saving data, please try again');
+                    },
+                    complete: function () {
+                        $btn.removeClass('disabled').html($html);
+                    }
+                });
+
+
+            }),
+            Noty.button('Close', 'btn btn-danger btn-sm rounded-0 btn-block pointer', function () {
+                n.close();
+            })
+        ]
+    }).on('afterShow', function () {
+        $.ajax({
+            type: "GET",
+            url: btn.attr('data-url'),
+            success: function (data) {
+                $('#loadForm').html(data);
+            },
+            fail: function (err) {
+                openNoty('error', 'Error loading data, please try again');
+                n.close();
+            }
+        });
+    }).show();
+
 }
 
 function detectHash() {
@@ -113,6 +265,27 @@ function detectHash() {
 
     $("[data-hash=" + hash.replace('#', '') + "]").trigger('click');
 
+}
+
+function initEditable(selector) {
+    var $edit = $(selector);
+    if ($edit.length) {
+        $edit.editable({
+            ajaxOptions: {
+                type: 'get'
+            },
+            mode: 'inline',
+            emptytext: 'empty',
+            success: function (data, newValue) {
+                openNoty(data.result, data.message);
+                if (data.result !== 'success') {
+                    $(this).attr('data-pk', data.newPK);
+                } else {
+                    return {newValue: data.newValue};
+                }
+            }
+        });
+    }
 }
 
 /* Toggle Treview */
@@ -149,6 +322,7 @@ $(document).on('click', '.clickable', function (e) {
     if (messageIsOpen) {
         if (!$(this).hasClass('innerMessage')) {
             cols.hideMessage();
+            $('.trigger-message-close').trigger('click');
         }
         setTimeout(function () {
             cols.showMessage();
@@ -190,9 +364,11 @@ function loadDetails(trigger, id) {
         initModal();
         initTooltips('.tt');
         initPerfectScrollbar('.subScroll');
+        /* ------- initEditable ------- */
+        initEditable('.editable');
 
         /* If it is a menu Link, init active menu bar */
-        if(trigger.hasClass('mLink')){
+        if (trigger.hasClass('mLink')) {
             initMenu(trigger.parent());
         }
 
@@ -272,7 +448,7 @@ function initModal() {
 
 }
 
-function initPerfectScrollbar(selector){
+function initPerfectScrollbar(selector) {
     var $ps = $(selector);
     if ($ps.length) {
         new PerfectScrollbar(selector);
@@ -320,7 +496,7 @@ function openNoty(type, text) {
 }
 
 function initTooltips(selector) {
-    
+
     var $tt = $(selector);
     $tt.tooltipster({
         theme: 'tooltipster-punk',

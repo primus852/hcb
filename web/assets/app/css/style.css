@@ -775,16 +775,6 @@ a:hover {
     }
 }
 
-@media only screen and (max-width: 1500px) {
-    .show-message #main {
-        margin-right: 0;
-    }
-
-    .show-message .messageFly {
-        left: 50%;
-        width: 50%;
-    }
-}
 
 @media only screen and (max-width: 1366px) {
     #sidebar {
@@ -1836,4 +1826,9 @@ i.mce-i-fa-lock:before {
 .treeMenu {
     padding-left: 1.5rem !important;
     display: none;
+}
+
+.nice-font{
+    font-weight:100;
+    font-size:2.5rem;
 }

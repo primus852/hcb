@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-6">
+        <input placeholder="Code" class="sendValue" type="text" data-name="{{ 'Code'|encrypt }}" value="{% if entity is not null %}{{ entity.code }}{% endif %}" data-table-index="0"/>
+    </div>
+    <div class="col-6">
+        <input placeholder="Rate" class="sendValue" type="text" data-name="{{ 'Value'|encrypt }}" value="{% if entity is not null %}{{ entity.value }}{% endif %}" data-table-index="4"/>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-12">
+        <input placeholder="Description" class="sendValue" type="text" data-name="{{ 'Description'|encrypt }}" value="{% if entity is not null %}{{ entity.description }}{% endif %}" data-table-index="1"/>
+    </div>
+</div>

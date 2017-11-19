@@ -20,6 +20,7 @@
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/node_modules/tooltipster/dist/css/tooltipster.bundle.min.css') }}">
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/node_modules/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css') }}">
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/node_modules/fine-uploader/fine-uploader/fine-uploader.min.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ asset('assets/node_modules/X-editable/dist/bootstrap-editable/css/bootstrap-editable.css') }}">
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/app/css/modal.min.css') }}"/>
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/app/css/style.min.css') }}"/>
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/app/css/reset.min.css') }}"/>
@@ -87,12 +88,25 @@
                 <ul>
                     <li>
                         <a href="#" class="mLink toggleTree">
-                            <i class="fa fa-chevron-right"></i> Separate Menu
+                            <i class="fa fa-chevron-right"></i> Setup
                         </a>
                         <ul class="treeMenu">
-                            <li id="contentMenu4" class="treeItem">
-                                <a href="#" class="mLink">
-                                    <i class="fa fa-eur"></i> Link 3
+                            <li id="contentBAR" class="treeItem">
+                                <a href="#" class="mLink clickable"
+                                   data-url="{{ path('setupBar') }}"
+                                   data-hash="setup-bar"
+                                   data-trigger="setup-bar-config"
+                                >
+                                    <i class="fa fa-eur"></i> BAR
+                                </a>
+                            </li>
+                            <li id="contentRatesetup" class="treeItem">
+                                <a href="#" class="mLink clickable"
+                                   data-url="{{ path('setupRatesOverview') }}"
+                                   data-hash="setup-rates"
+                                   data-trigger="setup-rates-config"
+                                >
+                                    <i class="fa fa-eur"></i> Ratecodes
                                 </a>
                             </li>
                         </ul>
@@ -136,6 +150,9 @@
 {% block body %}{% endblock %}
 <!-- LOAD JS FILES -->
 
+<!-- Routes -->
+<input type="hidden" id="ajax-route-edit-mod" value="{{ path('ajaxUpdateModifier') }}" />
+
 <script type="text/javascript" src="{{ asset('assets/node_modules/jquery/dist/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/node_modules/popper.js/dist/umd/popper.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
@@ -147,6 +164,8 @@
 <script type="text/javascript" src="{{ asset('assets/node_modules/tooltipster/dist/js/tooltipster.bundle.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/node_modules/select2/dist/js/select2.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/node_modules/fine-uploader/fine-uploader/fine-uploader.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/node_modules/X-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/app/js/xeditable.bs4.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/app/js/hashchange.min.js') }}"></script>
 {% block javascripts %}{% endblock %}
 <script src="{{ asset('assets/app/js/app.js') }}"></script>

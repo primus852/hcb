@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-4">
+        <input placeholder="Bezeichnung" class="sendValue" type="text" data-name="{{ 'Description'|encrypt }}" value="{% if entity is not null %}{{ entity.description }}{% endif %}" data-table-index="0"/>
+    </div>
+    <div class="col-4">
+        <input placeholder="Seriennummer*" class="sendValue" type="text" data-name="{{ 'SerialNo'|encrypt }}" value="{% if entity is not null %}{{ entity.serialNo }}{% endif %}" data-table-index="1"/>
+    </div>
+    <div class="col-4">
+        <input placeholder="Produktnummer*" class="sendValue" type="text" data-name="{{ 'ProductId'|encrypt }}" value="{% if entity is not null %}{{ entity.productId }}{% endif %}" data-table-index="2"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-4">
+        <input placeholder="Bemerkung*" class="sendValue" type="text" data-name="{{ 'Note'|encrypt }}" value="{% if entity is not null %}{{ entity.note }}{% endif %}" data-table-index="3"/>
+    </div>
+    <div class="col-4">
+        <input placeholder="Standort*" class="sendValue" type="text" data-name="{{ 'Location'|encrypt }}" value="{% if entity is not null %}{{ entity.location }}{% endif %}" data-table-index="4"/>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-4">
+        <span style="font-style: italic;">*optional</span>
+    </div>
+</div>

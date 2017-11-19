@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-12">
+        <select class="sendValue" type="select" data-name="{{ 'Base'|encrypt }}" data-table-index="2">
+            <option value="0">--choose Baserate--</option>
+            <option value="null">none</option>
+            {% for rate in rates %}
+                {% set selected='' %}
+                {% if entity is not null and entity.base is not null and entity.base.id == rate.id %}
+                    {% set selected='selected="selected"' %}
+                {% endif %}
+                <option value="{{ rate.id }}" {{ selected }}>{{ rate.code }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-6">
+        <input placeholder="Code" class="sendValue" type="text" data-name="{{ 'Code'|encrypt }}" value="{% if entity is not null %}{{ entity.code }}{% endif %}" data-table-index="0"/>
+    </div>
+    <div class="col-6">
+        <input placeholder="Rate" class="sendValue" type="text" data-name="{{ 'Value'|encrypt }}" value="{% if entity is not null %}{{ entity.value }}{% endif %}" data-table-index="4"/>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-3">
+        <select class="sendValue" type="select" data-name="{{ 'Modifier'|encrypt }}" data-table-index="3">
+            <option value="add">+</option>
+            <option value="subtract">-</option>
+            <option value="times">x</option>
+        </select>
+    </div>
+    <div class="col-3">
+        <select class="sendValue" type="select" data-name="{{ 'IsFlat'|encrypt }}" data-table-index="4">
+            <option value="true">flat</option>
+            <option value="false">percent</option>
+        </select>
+    </div>
+    <div class="col-6">
+        <input placeholder="Discount/Add" class="sendValue" type="text" data-name="{{ 'ModifierValue'|encrypt }}" value="{% if entity is not null %}{{ entity.modifierValue }}{% endif %}" data-table-index="5"/>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-12">
+        <input placeholder="Description" class="sendValue" type="text" data-name="{{ 'Description'|encrypt }}" value="{% if entity is not null %}{{ entity.description }}{% endif %}" data-table-index="1"/>
+    </div>
+</div>
